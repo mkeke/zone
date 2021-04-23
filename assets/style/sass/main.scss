@@ -1,0 +1,140 @@
+@import 'mixins';
+
+* {
+    margin: 0; padding: 0;
+}
+
+ul {
+    list-style: none;
+}
+
+html, body {
+    height: 100%;
+    background-color: black;
+    overflow: hidden;
+}
+
+.fullscreen {
+    // position must be fixed to avoid
+    // pull-down pull-up scrolling on iPad
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    // border: 2px dashed yellow;
+}
+
+section {
+    display: none;
+    &.visible {
+        display: block;
+    }
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+
+    &.timer {
+        background-color: black;
+    }
+    &.end {
+        background-color: green;
+    }
+}
+svg.clock {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.digits {
+    display: block;
+    position: absolute;
+    text-align: center;
+    // width + left + top is maintained by js
+}
+.digits span {
+
+    // numbers
+    display: inline-block;
+    vertical-align: top;
+    // width + height is set runtime
+
+    /*
+        SVG numbers, casio style
+        vars for each line:
+
+            ---l1---
+           |        |
+           l2      l3
+           |        |
+            ---l4---
+           |        |
+           l5      l6
+           |        |
+            ---l7---
+
+        active lines are white
+        inactive lines are semitransparent black
+    */
+
+    $gw: '<g fill="#888">';
+    $gb: '<g fill="#222">';
+    $g: '</g>';
+    $l1: '<path d="M 55,35 l 20,-20 h 110 l 20,20 l -20,20 h -110 Z" />';
+    $l2: '<path d="M 45,45 l 30,30 v 90 l -30,30 l -30,-30 v -90 Z" />';
+    $l3: '<path d="M 215,45 l 30,30 v 90 l -30,30 l -30,-30 v -90 Z" />';
+    $l4: '<path d="M 55,205 l 20,-20 h 110 l 20,20 l -20,20 h -110 Z" />';
+    $l5: '<path d="M 45,215 l 30,30 v 140 l -30,30 l -30,-30 v -140 Z" />';
+    $l6: '<path d="M 215,215 l 30,30 v 140 l -30,30 l -30,-30 v -140 Z" />';
+    $l7: '<path d="M 55,425 l 20,-20 h 110 l 20,20 l -20,20 h -110 Z" />';
+
+    &.n0 {
+        $svg: ($gb,$l4,$g, $gw,$l1,$l2,$l3,$l5,$l6,$l7,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n1 {
+        $svg: ($gb,$l1,$l2,$l4,$l5,$l7,$g, $gw,$l3,$l6,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n2 {
+        $svg: ($gb,$l2,$l6,$g, $gw,$l1,$l3,$l4,$l5,$l7,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n3 {
+        $svg: ($gb,$l2,$l5,$g, $gw,$l1,$l3,$l4,$l6,$l7,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n4 {
+        $svg: ($gb,$l1,$l5,$l7,$g, $gw,$l2,$l3,$l4,$l6,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n5 {
+        $svg: ($gb,$l3,$l5,$g, $gw,$l1,$l2,$l4,$l6,$l7,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n6 {
+        $svg: ($gb,$l3,$g, $gw,$l1,$l2,$l4,$l5,$l6,$l7,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n7 {
+        $svg: ($gb,$l2,$l4,$l5,$g, $gw,$l1,$l3,$l6,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n8 {
+        $svg: ($gw,$l1,$l2,$l3,$l4,$l5,$l6,$l7,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+    &.n9 {
+        $svg: ($gb,$l5,$l7,$g, $gw,$l1,$l2,$l3,$l4,$l6,$g);
+        @include svg($svg, 0, 0, 260, 460);
+    }
+}

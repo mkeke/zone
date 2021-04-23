@@ -1,0 +1,19 @@
+{
+	"defaults" : {
+		"paths": {
+		},
+		"variables": {
+			"pageTitle": "Zone"
+		}
+	},
+
+	"versions": {
+		"z": {
+			"paths" : {
+				"dest": "out/"
+			},
+			"variables": {
+			}
+		}
+	}
+}
