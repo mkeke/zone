@@ -6,6 +6,5 @@ zz.loadReady(function(){
     util.init();
     dom.init();
     state.init();
-
     zone.init();
 });

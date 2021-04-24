@@ -1,19 +1,31 @@
 const dom = {
     runtimeStyle: null,
     parent: null,
-    clock: null,
-    digits: null,
+
     timerSection: null,
     endSection: null,
+    configSection: null,
+    range: null,
+    start: null,
+    cancel: null,
+    clock: null,
+    digits: null,
 
     init: function() {
 
         this.runtimeStyle = z("style.runtime");
         this.parent = z(".fullscreen");
-        this.clock = z("svg.clock path");
-        this.digits = z(".digits");
+
         this.timerSection = z("section.timer");
         this.endSection = z("section.end");
+        this.configSection = z("section.config");
+
+        this.range = this.configSection.find("input[type=range]");
+        this.start = this.configSection.find("button.start");
+        this.cancel = this.configSection.find("button.cancel");
+
+        this.clock = this.timerSection.find("svg.clock path");
+        this.digits = this.timerSection.find(".digits");
 
         // handle viewport size change
         this.handleResize();
@@ -84,13 +96,25 @@ const dom = {
     },
 
     showTimer: function() {
+        this.hideConfig();
         this.timerSection.addClass("visible");
     },
+
     showEnd: function() {
+        this.hideConfig();
         this.endSection.addClass("visible");
     },
+
     hideEnd: function() {
         this.endSection.removeClass("visible");
+    },
+
+    showConfig: function() {
+        this.configSection.addClass("visible");
+    },
+
+    hideConfig: function() {
+        this.configSection.removeClass("visible");
     },
 
 };

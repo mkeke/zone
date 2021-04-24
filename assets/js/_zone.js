@@ -1,10 +1,44 @@
 const zone = {
     init: function() {
+
+        // set corect values on range
+        dom.range.setAttribute("min", conf.min);
+        dom.range.setAttribute("max", conf.max);
+        dom.range.setAttribute("value", conf.default);
+
+        this.handleStartClick();
+        this.handleCancelClick();
+        this.handleTimerClick();
         this.handleEndClick();
-        dom.showTimer();
-        state.start();
+
+        dom.showConfig();
 
         util.raf(this.run.bind(this));
+
+    },
+
+    handleStartClick: function() {
+        dom.start.addEventListener("click", function(e){
+            e.preventDefault();
+            state.minutes = parseInt(dom.range.value);
+            state.start();
+            dom.showTimer();
+        });
+    },
+
+    handleCancelClick: function() {
+        dom.cancel.addEventListener("click", function(e){
+            e.preventDefault();
+            dom.hideConfig();
+            log("cancel");
+        });
+    },
+
+    handleTimerClick: function() {
+        dom.timerSection.addEventListener("click", function(e){
+            e.preventDefault();
+            dom.showConfig();
+        }.bind(this));
     },
 
     handleEndClick: function() {
@@ -28,34 +62,38 @@ const zone = {
         if (time - state.time > conf.delay) {
             state.time = time;
 
-            if(time > state.endTime) {
-                dom.showEnd();
-            } else {
-                // calculate elapsed time
-                let elapsed = time - state.startTime;
+            if(state.running) {
 
-                // determine the remaining angle
-                state.deg = 360 - (360 * elapsed / state.interval)%360;
+                if(time > state.endTime) {
+                    dom.showEnd();
+                    state.running = false;
+                } else {
+                    // calculate elapsed time
+                    let elapsed = time - state.startTime;
 
-                // calculate dx and dy
-                let rad = state.deg * Math.PI / 180;
-                let dx = Math.cos(rad) * conf.r;
-                let dy = Math.sin(rad) * conf.r;
+                    // determine the remaining angle
+                    state.deg = 360 - (360 * elapsed / state.interval)%360;
 
-                // translate coordinates to fit the rotated flip view
-                let x = conf.ox + dy;
-                let y = conf.oy - dx;
-                let f = state.deg < 180 ? "0 0 1" : "0 1 1";
+                    // calculate dx and dy
+                    let rad = state.deg * Math.PI / 180;
+                    let dx = Math.cos(rad) * conf.r;
+                    let dy = Math.sin(rad) * conf.r;
 
-                // set the correct pie sector
-                dom.clock.setAttribute("d", `M${conf.ox},${conf.oy} v${-conf.r} A ${conf.r},${conf.r} ${f} ${x},${y} Z`);
+                    // translate coordinates to fit the rotated flip view
+                    let x = conf.ox + dy;
+                    let y = conf.oy - dx;
+                    let f = state.deg < 180 ? "0 0 1" : "0 1 1";
 
-                let remainingMinutes = Math.ceil((state.interval-elapsed)/60000);
-                if (remainingMinutes !== state.lastRemaining) {
-                    state.lastRemaining = remainingMinutes;
-                    dom.digits.innerHTML = this.createNumHTML(state.lastRemaining);
+                    // set the correct pie sector
+                    dom.clock.setAttribute("d", `M${conf.ox},${conf.oy} v${-conf.r} A ${conf.r},${conf.r} ${f} ${x},${y} Z`);
+
+                    let remainingMinutes = Math.ceil((state.interval-elapsed)/60000);
+                    if (remainingMinutes !== state.lastRemaining) {
+                        state.lastRemaining = remainingMinutes;
+                        dom.digits.innerHTML = this.createNumHTML(state.lastRemaining);
+                    }
+
                 }
-
             }
         }
         util.raf(this.run.bind(this));

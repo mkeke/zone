@@ -1,12 +1,16 @@
 const state = {
     debugLevel: null,
     time: null,
+    running: null,
 
     // px size of clock svg
     clockSize: null,
 
     // current angle (in degrees) of pie chart countdown
     deg: null,
+
+    // selected minute value
+    minutes: null,
 
     // total interval time in milliseconds
     interval: null,
@@ -23,17 +27,19 @@ const state = {
 
         // timer for animation loop
         this.time = Date.now();
+        this.running = false;
 
     },
 
     start: function() {
         this.deg = 360;
-        this.interval = conf.minutes * 60 * 1000;
+        this.interval = state.minutes * 60 * 1000;
 
         // set + calc timestamps
         this.startTime = Date.now();
         this.endTime = this.startTime + this.interval;
 
         this.lastRemaining = 0;
+        this.running = true;
     }
 };

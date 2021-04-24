@@ -47,6 +47,9 @@ section {
     &.end {
         background-color: green;
     }
+    &.config {
+        background-color: blue;
+    }
 }
 svg.clock {
     position: absolute;
