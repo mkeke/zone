@@ -6,6 +6,13 @@ const zone = {
         dom.range.setAttribute("max", conf.max);
         dom.range.setAttribute("value", conf.default);
 
+        // set values on labels
+        dom.min.innerHTML = this.createNumHTML(conf.min);
+        dom.max.innerHTML = this.createNumHTML(conf.max);
+        dom.value.innerHTML = this.createNumHTML(conf.default);
+
+        // handle user interaction
+        this.handleRangeMove();
         this.handleStartClick();
         this.handleCancelClick();
         this.handleTimerClick();
@@ -17,12 +24,19 @@ const zone = {
 
     },
 
+    handleRangeMove: function() {
+        dom.range.addEventListener("input", function(e){
+            dom.value.innerHTML = this.createNumHTML(dom.range.value);
+        }.bind(this));
+    },
+
     handleStartClick: function() {
         dom.start.addEventListener("click", function(e){
             e.preventDefault();
             state.minutes = parseInt(dom.range.value);
             state.start();
             dom.showTimer();
+            dom.configSection.removeClass("initial");
         });
     },
 

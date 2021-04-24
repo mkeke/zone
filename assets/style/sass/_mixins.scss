@@ -69,3 +69,25 @@
     background-size: $size;
     background-position: $position;
 }
+
+// track
+@mixin range-track {
+    width: 100%;
+    height: 100%;
+    background: transparent;
+}
+
+// thumb
+@mixin range-thumb {
+    width: 10px;
+    height: 100%;
+    appearance: none;
+    background: transparent;
+    border: none;
+    border-radius: 5px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: yellow;
+    background-image: none;
+}

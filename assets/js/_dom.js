@@ -8,6 +8,9 @@ const dom = {
     range: null,
     start: null,
     cancel: null,
+    min: null,
+    max: null,
+    value: null,
     clock: null,
     remaining: null,
 
@@ -23,6 +26,9 @@ const dom = {
         this.range = this.configSection.find("input[type=range]");
         this.start = this.configSection.find("button.start");
         this.cancel = this.configSection.find("button.cancel");
+        this.min = this.configSection.find(".min");
+        this.max = this.configSection.find(".max");
+        this.value = this.configSection.find(".value");
 
         this.clock = this.timerSection.find("svg.clock path");
         this.remaining = this.timerSection.find(".remaining");

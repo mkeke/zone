@@ -1,7 +1,7 @@
 const conf = {
 
     // range extremities + default value
-    min: 5,
+    min: 1,
     max: 120,
     default: 30,
 
