@@ -10,7 +10,7 @@ const dom = {
 
         this.runtimeStyle = z("style.runtime");
         this.parent = z(".fullscreen");
-        this.clock = z("svg.clock");
+        this.clock = z("svg.clock path");
         this.digits = z(".digits");
         this.timerSection = z("section.timer");
         this.endSection = z("section.end");

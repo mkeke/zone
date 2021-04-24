@@ -52,8 +52,8 @@ zz.loadReady(function(){
                 let y = conf.oy - dx;
                 let f = state.deg < 180 ? "0 0 1" : "0 1 1";
 
-                dom.clock.innerHTML = 
-                    `<path fill="red" d="M${conf.ox},${conf.oy} v${-conf.r} A ${conf.r},${conf.r} ${f} ${x},${y} Z" />`;
+                // set the correct pie sector
+                dom.clock.setAttribute("d", `M${conf.ox},${conf.oy} v${-conf.r} A ${conf.r},${conf.r} ${f} ${x},${y} Z`);
 
                 let remainingMinutes = Math.ceil((state.interval-elapsed)/60000);
                 if (remainingMinutes !== state.lastRemaining) {
