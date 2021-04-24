@@ -4,7 +4,7 @@ Stay in the zone and remember to take regular breaks guided by this visual count
 
 https://lysebo.xyz/tools/zone
 
-![config](conf.jpg)  
+![config](conf.png)  
 Select the desired interval (in minutes) and press start (or cancel to return to the ongoing countdown).
 
 The countdown is not demanding much attention. Tap/click on the screen to open up the configuration.  
