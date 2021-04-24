@@ -90,7 +90,7 @@ const zone = {
                     let remainingMinutes = Math.ceil((state.interval-elapsed)/60000);
                     if (remainingMinutes !== state.lastRemaining) {
                         state.lastRemaining = remainingMinutes;
-                        dom.digits.innerHTML = this.createNumHTML(state.lastRemaining);
+                        dom.remaining.innerHTML = this.createNumHTML(state.lastRemaining);
                     }
 
                 }

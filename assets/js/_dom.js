@@ -9,7 +9,7 @@ const dom = {
     start: null,
     cancel: null,
     clock: null,
-    digits: null,
+    remaining: null,
 
     init: function() {
 
@@ -25,7 +25,7 @@ const dom = {
         this.cancel = this.configSection.find("button.cancel");
 
         this.clock = this.timerSection.find("svg.clock path");
-        this.digits = this.timerSection.find(".digits");
+        this.remaining = this.timerSection.find(".remaining");
 
         // handle viewport size change
         this.handleResize();
@@ -49,18 +49,18 @@ const dom = {
         state.digitWidth = Math.round(state.clockSize * 0.15);
         state.digitHeight = Math.round(46*state.digitWidth/26);
 
-        // position digits differently based on screen orientation
+        // position remaining time differently based on screen orientation
         if(window.innerWidth > window.innerHeight) {
             // pos right of disc
-            state.digitLeft = Math.round(window.innerWidth / 2 + state.clockSize / 2);
-            state.digitTop = Math.round(window.innerHeight / 2 - state.digitHeight / 2);
-            state.digitContainerWidth = Math.floor(window.innerWidth/2 - state.clockSize/2);
-            dom.digits.removeClass("height");
+            state.remainingLeft = Math.round(window.innerWidth / 2 + state.clockSize / 2);
+            state.remainingTop = Math.round(window.innerHeight / 2 - state.digitHeight / 2);
+            state.remainingWidth = Math.floor(window.innerWidth/2 - state.clockSize/2);
+            dom.remaining.removeClass("height");
         } else {
             // pos bottom of disc
-            state.digitLeft = 0;
-            state.digitTop = Math.round( (window.innerHeight + state.clockSize + state.digitHeight)/2);
-            state.digitContainerWidth = window.innerWidth;
+            state.remainingLeft = 0;
+            state.remainingTop = Math.round( (window.innerHeight + state.clockSize + state.digitHeight)/2);
+            state.remainingWidth = window.innerWidth;
         }
     },
 
@@ -81,10 +81,10 @@ const dom = {
                 `height:${state.digitHeight}px;` +
                 '}';
 
-        str += '.digits{' +
-                `left:${state.digitLeft}px;` +
-                `top:${state.digitTop}px;` +
-                `width:${state.digitContainerWidth}px;` +
+        str += '.remaining{' +
+                `left:${state.remainingLeft}px;` +
+                `top:${state.remainingTop}px;` +
+                `width:${state.remainingWidth}px;` +
                 '}';
 
         this.runtimeStyle.innerHTML = str;
@@ -101,7 +101,6 @@ const dom = {
     },
 
     showEnd: function() {
-        this.hideConfig();
         this.endSection.addClass("visible");
     },
 

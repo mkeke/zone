@@ -3,8 +3,13 @@ const state = {
     time: null,
     running: null,
 
-    // px size of clock svg
+    // px sizes and position values
     clockSize: null,
+    remainingLeft: null,
+    remainingTop: null,
+    remainingWidth: null,
+    digitWidth: null,
+    digitHeight: null,
 
     // current angle (in degrees) of pie chart countdown
     deg: null,
