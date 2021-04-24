@@ -83,4 +83,14 @@ const dom = {
         this.updateRuntimeCSS();
     },
 
+    showTimer: function() {
+        this.timerSection.addClass("visible");
+    },
+    showEnd: function() {
+        this.endSection.addClass("visible");
+    },
+    hideEnd: function() {
+        this.endSection.removeClass("visible");
+    },
+
 };
